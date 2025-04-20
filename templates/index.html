@@ -62,8 +62,6 @@
                                         <span>{{ table_data['작업 일보'].get(str(row), {}).get(col, '0') }}</span>
                                     {% elif row == 48 and col in ['전월 누계', '전일 누계', '금일 출역', '금일 누계', '총 누계'] %}
                                         <span>{{ table_data['작업 일보'].get(str(row), {}).get(col, '0') }}</span>
-                                    {% elif row == 48 %}
-                                        <!-- 총계 행에서 계산 열 외에는 빈칸 -->
                                     {% elif col == '총 누계' %}
                                         <span>{{ table_data['작업 일보'].get(str(row), {}).get(col, '0') }}</span>
                                     {% else %}
