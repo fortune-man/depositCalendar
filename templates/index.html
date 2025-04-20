@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>소비 캘린더</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, button { padding: 10px; margin: 5px; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h2>지출 입력</h2>
+    <form method="post">
+        <input type="date" name="date" required>
+        <input type="number" name="amount" placeholder="금액" required>
+        <input type="text" name="item" placeholder="항목" required>
+        <button type="submit">저장</button>
+    </form>
+    <h2>지출 목록</h2>
+    <ul>
+        {% for expense in expenses %}
+            <li>{{ expense.strip() }}</li>
+        {% endfor %}
+    </ul>
+    <!DOCTYPE html>
+<html>
+<head>
+    <title>지출 수정</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        input, button { padding: 10px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h2>지출 수정</h2>
+    <form method="post">
+        <input type="date" name="date" value="{{ expense[0] }}" required>
+        <input type="number" name="amount" value="{{ expense[1] }}" required>
+        <input type="text" name="item" value="{{ expense[2] }}" required>
+        <button type="submit">수정</button>
+    </form>
+    <a href="{{ url_for('home') }}">취소</a>
+</body>
+</html>
