@@ -2,6 +2,7 @@ import unittest
 import sqlite3
 from app import app, load_data, save_data, calculate_totals
 
+
 class TestApp(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
@@ -13,8 +14,8 @@ class TestApp(unittest.TestCase):
         conn.close()
 
     def test_save_data_overwrites(self):
-        save_data("작업 일보", "1", "직종", "관리")
-        save_data("작업 일보", "1", "직종", "목수")
+        save_data("작업 일보", "직종", "관리")
+        save_data("작업 일보", "직종", "목수")
         data = load_data()
         self.assertEqual(data["작업 일보"]["1"]["직종"], "목수")
         conn = sqlite3.connect('expenses.db')
@@ -26,9 +27,9 @@ class TestApp(unittest.TestCase):
         self.assertEqual(count, 1)
 
     def test_full_workflow(self):
-        save_data("작업 일보", "1", "직종", "관리")
-        save_data("작업 일보", "1", "전월 누계", "10")
-        save_data("작업 일보", "1", "금일 출역", "5")
+        save_data("작업 일보",  "직종", "관리")
+        save_data("작업 일보",  "전월 누계")
+        save_data("작업 일보",  "금일 출역")
         data = load_data()
         self.assertEqual(data["작업 일보"]["1"]["직종"], "관리")
         data = calculate_totals(data)
